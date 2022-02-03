@@ -13,17 +13,22 @@
     <h1>Inlämning1 Javascript 2 Cathrine Persson</h1>
 
     <form>
-        <input class="display" id="input" type="text">
-        <button onclick="addBtn()" class="add-btn">+</button>
-        <button onclick="subBtn()" class="sub-btn">-</button>
-        <button onclick="sumBtn()" class="sum-btn">=</button>
+        <input type="text" id="display-el">
+        <input type="button" value="+" id="add">
+        <input type="button" value="-" id="sub">
+        <input type="button" value="=" id="sum">
 
-        <p>Calculation: </p>
-        <p>Result: </p>
+        <p>Calculation:
+            <span id="calc-el"></span>
+        </p>
+        <p>Result:
+            <span id="result-el"></span>
+        </p>
     </form>
 
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="app.js"></script>
+
 
 
 </body>
