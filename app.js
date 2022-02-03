@@ -24,14 +24,14 @@ console.log(calcArr)
 
 
 
-
+/*
 let calc = [];
 let actions = [];
 const inputEl = document.getElementById("input-el");
 const calcEl = document.getElementById("calc-el");
 const messageEl = document.getElementById("message-el");
 
-
+ 
 $('#test').click(function() {
 
 
@@ -39,6 +39,12 @@ $('#test').click(function() {
     actions.push("+");
     console.log(calc);
 });
+ */
+
+
+
+
+
 
 
 
