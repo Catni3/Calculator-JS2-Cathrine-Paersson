@@ -35,13 +35,14 @@ const messageEl = document.getElementById("message-el");
 $('#test').click(function() {
 
 
-            calc.push(inputEl.value);
-            actions.push("+");
-            console.log(calc);
+    calc.push(inputEl.value);
+    actions.push("+");
+    console.log(calc);
+});
 
 
 
-            /* calcEl.textContent= ""; /
+/* calcEl.textContent= ""; /
       for (let i = 0; i < calc.length; i++) {
       calcEl.textContent += calc[i] + actions[i];
       }
