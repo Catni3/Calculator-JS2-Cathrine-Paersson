@@ -5,22 +5,52 @@ const calcEl = document.getElementById("calc-el")
 const resultEl = document.getElementById("result-el")
 
 $('#add').click(function() {
-    calcArr.push(displayEl.value)
-    calcArr.textContent = "";
+  if (displayEl.value == "") {
+    return;
+  }
     operators.push("+")
+    inpSave()
+    printOut()
+});
 
-    for (let i = 0; i < calcArr.length; i++) {
-        calcEl.textContent += calcArr[i] + operators[i];
-
-    }
+$('#sub').click(function() {
+  if (displayEl.value == "") {
+    return;
+  }
+  operators.push("-")
+  inpSave()
+  printOut()
 });
 
 $('#sum').click(function() {
-    calcArr.push(displayEl.value)
-        /* resultEl.textContent = "" */
+  console.log(calcEl.textContent)
+  resultEl.textContent = eval(calcEl.textContent);
+
+  calcArr.splice(0, calcArr.length);
+  operators.splice(0, operators.length);
+  calcEl.textContent = "";
 });
 console.log(calcArr)
 
+function printOut() {
+  calcEl.textContent = "";
+  if (calcArr.length === 1) {
+    calcEl.textContent += calcArr[0] + operators[0]
+  } else {
+    for (let i = 0; i < calcArr.length; i++) {
+      calcEl.textContent += operators[i] + calcArr[i]
+      
+    }
+  }
+  if (calcArr.length > 1) {
+    calcEl.textContent = calcEl.textContent.substring(1)
+    
+  }
+}
+
+function inpSave() {
+  calcArr.push(displayEl.value)
+}
 
 
 
