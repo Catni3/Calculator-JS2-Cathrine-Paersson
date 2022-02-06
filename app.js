@@ -1,140 +1,67 @@
-let operators = []
-let calcArr = []
-const displayEl = document.getElementById("display-el")
-const calcEl = document.getElementById("calc-el")
-const resultEl = document.getElementById("result-el")
+let operators = [];
+let calcArr = [];
 
-$('#add').click(function() {
-  if (displayEl.value == "") {
-    return;
-  }
-    operators.push("+")
-    inpSave()
-    printOut()
-});
+/* Startar jquery */
+$(document).ready(function() {
+    /* Istället för 'getElementById' använder jag jquerys variant */
+    const displayEl = $('#display-el').get(0);
+    const calcEl = $("#calc-el").get(0);
+    const resultEl = $("#result-el").get(0);
 
-$('#sub').click(function() {
-  if (displayEl.value == "") {
-    return;
-  }
-  operators.push("-")
-  inpSave()
-  printOut()
-});
+    /* plus och minus knappen */
+    $("#add, #sub").click(function() {
+            if (displayEl.value == "") {
+                return;
+            }
+            /* genom att använda .attr och kalla på value i knapparna vi kallar 
+            på gör att jag kunde slå ihop plusoch minusknappen i samma klickfunktion */
+            operators.push($(this).attr("value"));
+            /* Här kallar jag på fuktionerna som gör att uträkningen sparas och skrivs ut */
+            inpSave();
+            printOut();
+        }),
 
-$('#sum').click(function() {
-  console.log(calcEl.textContent)
-  resultEl.textContent = eval(calcEl.textContent);
+        /* Här är klickfuktionen för = knappen. */
+        $("#sum").click(function() {
+            /* eval() gör uträkningar av det som står i calkulator fältet och sätter de result fältet.
+            Är medveten om att eval är en osäker funktion att använda men i 
+            nuläget vet jag inte hur jag ska ändra det till något annat */
+            resultEl.textContent = eval(calcEl.textContent);
 
-  calcArr.splice(0, calcArr.length);
-  operators.splice(0, operators.length);
-  calcEl.textContent = "";
-});
-console.log(calcArr)
+            calcArr.splice(0, calcArr.length);
+            operators.splice(0, operators.length);
+            calcEl.textContent = "";
+        });
 
-function printOut() {
-  calcEl.textContent = "";
-  if (calcArr.length === 1) {
-    calcEl.textContent += calcArr[0] + operators[0]
-  } else {
-    for (let i = 0; i < calcArr.length; i++) {
-      calcEl.textContent += operators[i] + calcArr[i]
-      
+    /* funktionen för själva utskriften av uträkningen */
+    function printOut() {
+        /* börjar med att tömma calkulator fältet och resultatfältet inför ny uträckning */
+        calcEl.textContent = "";
+        resultEl.textContent = "";
+        /* Om man skulle råka skriva in en bokstav kommer programmet att förbise det. 
+        Det går alltså inte att använda bokstäver i uträckningen */
+        if (isNaN(displayEl.value)) {
+            calcArr = [];
+            operators = [];
+            return;
+            /* om arrayen har exakt ett värde läggs det till i kalkylationen */
+        } else if (calcArr.length === 1) {
+            calcEl.textContent += calcArr[0] + operators[0];
+        } else {
+            /* använder .each i egenskap av for loop, 
+            där vi loopar igenom arrayen och skriver ut i kalkylationen */
+            $.each(calcArr, function(i) {
+                calcEl.textContent += operators[i] + calcArr[i];
+            });
+        }
+        /* denna ser till att kalkylationen inte börjar med ett tecken, 
+        som kunde bli när man la till fler operatorer och siffror i uträkningen */
+        if (calcArr.length > 1) {
+            calcEl.textContent = calcEl.textContent.substring(1);
+        }
     }
-  }
-  if (calcArr.length > 1) {
-    calcEl.textContent = calcEl.textContent.substring(1)
-    
-  }
-}
-
-function inpSave() {
-  calcArr.push(displayEl.value)
-}
-
-
-
-/*
-let calc = [];
-let actions = [];
-const inputEl = document.getElementById("input-el");
-const calcEl = document.getElementById("calc-el");
-const messageEl = document.getElementById("message-el");
-
- 
-$('#test').click(function() {
-
-
-    calc.push(inputEl.value);
-    actions.push("+");
-    console.log(calc);
-});
- */
-
-
-
-
-
-
-
-
-/* calcEl.textContent= ""; /
-      for (let i = 0; i < calc.length; i++) {
-      calcEl.textContent += calc[i] + actions[i];
-      }
-
-    calcEl.textContent
-
-
-   /    if (calc.includes("+", "-")) {
-        alert("test")
-      } /
-
-   /    const lastentry = calc[calc.length - 1];
-       if (calc.includes(lastentry)) {
-
-        calc = calc.split("+").pop
-      } / 
-});
-
-$('#test3').click(function() {
-
-  actions.push("-")
-  calc.push(inputEl.value);
-  console.log(calc);
-
-  calcEl.textContent = "";
-  for (let i = 0; i < calc.length; i++) {
-  calcEl.textContent += calc[i] + actions[i];
-}
-});
-
-function equal() {
-
-
-  calc.push(inputEl.value);
-  for (let i = 0; i < calc.length; i++) {
-    calcEl.textContent += calc[i];
-    if(actions.length > i){
-    calcEl.textContent += actions[i];
+    /* här sparas det som står i calculation i arrayen för våra uträkningar */
+    function inpSave() {
+        calcArr.push(displayEl.value);
     }
-  }
-
-  messageEl.textContent = eval(calcEl.textContent);
-
-  console.log(eval(calc.join("")));
- 
-  calc.splice(0, calc.length);
-  actions.splice(0, actions.length);
-  calcEl.textContent = "";
-}
-
-/ function equal() {
-    var total = 0;
-    for (var i = 0; i < x.length; i++) {
-      total += x[i];
-      console.log(equal);
-    }
-    messageEl.textContent = "Result:" + equal
-  }
-*/
+})

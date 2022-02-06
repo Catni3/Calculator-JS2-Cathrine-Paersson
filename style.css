@@ -1,7 +1,38 @@
 body {
     background-color: darkgoldenrod;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-left: 100px;
+    margin-top: 45px;
 }
-span {
-    color:deeppink;
+
+p {
     font-weight: bold;
+}
+
+span {
+    color: deeppink;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1 {
+    Background-color: rgba(0, 0, 0, 0.781);
+    color: white;
+    width: fit-content;
+    padding: 10px 10px;
+    border-radius: 5px;
+}
+
+#add,
+#sub,
+#sum {
+    padding: 4px 8px;
+    border-radius: 5px;
+    border: none;
+}
+
+#display-el {
+    padding: 4px;
+    border: none;
+    border-radius: 5px;
 }
